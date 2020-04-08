@@ -21,7 +21,7 @@ jobs:
         run: npm i -g jsdoc
 
       - name: pull eris repo
-        run: git pull https://github.com/abalabahaha/eris 
+        run: git clone https://github.com/abalabahaha/eris 
 
       - name: generate docs
         run: jsdoc eris/lib/Client.js   
