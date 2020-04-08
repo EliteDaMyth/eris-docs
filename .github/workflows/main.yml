@@ -24,7 +24,7 @@ jobs:
         run: git clone https://github.com/abalabahaha/eris 
 
       - name: generate docs
-        run: jsdoc --template ./node_modules/jsdoc-json --destination docs.json eris/lib/Client.js && rm -rf node_modules && rm package-lock.json
+        run: jsdoc --template ./node_modules/jsdoc-json --destination docs.json eris/lib/Client.js && rm -rf node_modules && rm -rf eris && rm package-lock.json
         
       - name: Commit files
         run: |
