@@ -18,13 +18,13 @@ jobs:
           node-version: "12"
 
       - name: Install dependencies
-        run: npm i -g jsdoc
+        run: npm i -g jsdoc && npm install jsdoc-json
 
       - name: pull eris repo
         run: git clone https://github.com/abalabahaha/eris 
 
       - name: generate docs
-        run: jsdoc eris/lib/Client.js   
+        run: jsdoc --template ./node_modules/jsdoc-json --destination doc.json eris/lib/Client.js   
         
       - name: Commit files
         run: |
