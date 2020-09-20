@@ -1,20 +1,20 @@
 {
   "docs": [
     {
-      "comment": "/**\n    * Create a Client\n    * @arg {String} token bot token\n    * @arg {Object} [options] Eris options (all options are optional)\n    * @arg {Boolean} [options.autoreconnect=true] Have Eris autoreconnect when connection is lost\n    * @arg {Boolean} [options.compress=false] Whether to request WebSocket data to be compressed or not\n    * @arg {Number} [options.connectionTimeout=30000] How long in milliseconds to wait for the connection to handshake with the server\n    * @arg {Object} [options.disableEvents] If disableEvents[eventName] is true, the WS event will not be processed. This can cause significant performance increase on large bots. [A full list of the WS event names can be found on the docs reference page](/Eris/docs/reference#ws-event-names)\n    * @arg {Object} [options.allowedMentions] A list of mentions to allow by default in createMessage/editMessage\n    * @arg {Boolean} [options.allowedMentions.everyone] Whether or not to allow @everyone/@here.\n    * @arg {Boolean | Array<String>} [options.allowedMentions.roles] Whether or not to allow all role mentions, or an array of specific role mentions to allow.\n    * @arg {Boolean | Array<String>} [options.allowedMentions.users] Whether or not to allow all user mentions, or an array of specific user mentions to allow.\n    * @arg {Number} [options.firstShardID=0] The ID of the first shard to run for this client\n    * @arg {Boolean} [options.getAllUsers=false] Get all the users in every guild. Ready time will be severely delayed\n    * @arg {Number} [options.guildCreateTimeout=2000] How long in milliseconds to wait for a GUILD_CREATE before \"ready\" is fired. Increase this value if you notice missing guilds\n    * @arg {Boolean} [options.guildSubscriptions=true] If false, disables some guild subscription events, including typing and presence events. This will reduce processing load, but will also result in inconsistent member caching\n    * @arg {Number} [options.largeThreshold=250] The maximum number of offline users per guild during initial guild data transmission\n    * @arg {Number} [options.latencyThreshold=30000] The average request latency at which Eris will start emitting latency errors\n    * @arg {Number} [options.lastShardID=options.maxShards - 1] The ID of the last shard to run for this client\n    * @arg {Number | String} [options.maxShards=1] The total number of shards you want to run. If \"auto\" Eris will use Discord's recommended shard count.\n    * @arg {Number} [options.messageLimit=100] The maximum size of a channel message cache\n    * @arg {Boolean} [options.opusOnly=false] Whether to suppress the node-opus not found error or not\n    * @arg {Number} [options.ratelimiterOffset=0] A number of milliseconds to offset the ratelimit timing calculations by\n    * @arg {Number} [options.requestTimeout=15000] A number of milliseconds before requests are considered timed out\n    * @arg {Boolean} [options.restMode=false] Whether to enable getting objects over REST. This should only be enabled if you are not connecting to the gateway. Bot tokens must be prefixed manually in REST mode\n    * @arg {Boolean} [options.seedVoiceConnections=false] Whether to populate bot.voiceConnections with existing connections the bot account has during startup. Note that this will disconnect connections from other bot sessions\n    * @arg {String} [options.defaultImageFormat=\"jpg\"] The default format to provide user avatars, guild icons, and group icons in. Can be \"jpg\", \"png\", \"gif\", or \"webp\"\n    * @arg {Number} [options.defaultImageSize=128] The default size to return user avatars, guild icons, banners, splashes, and group icons. Can be any power of two between 16 and 2048. If the height and width are different, the width will be the value specified, and the height relative to that\n    * @arg {Object} [options.ws] An object of WebSocket options to pass to the shard WebSocket constructors\n    * @arg {Object} [options.agent] A HTTP Agent used to proxy requests\n    * @arg {Number} [options.maxReconnectAttempts=Infinity] The maximum amount of times that the client is allowed to try to reconnect to Discord.\n    * @arg {Number} [options.maxResumeAttempts=10] The maximum amount of times a shard can attempt to resume a session before considering that session invalid.\n    * @arg {Function} [options.reconnectDelay] A function which returns how long the bot should wait until reconnecting to Discord.\n    * @arg {Number | String[]} [options.intents] A list of intents, or raw bitmask value describing the intents to subscribe to. \"presence\" intent must be enabled on your application's page to be used.\n    */",
+      "comment": "/**\n* Represents the main Eris client\n* @extends EventEmitter\n* @prop {String} token The bot user token\n* @prop {Boolean?} bot Whether the bot user belongs to an OAuth2 application\n* @prop {Object} options Eris options\n* @prop {Object} channelGuildMap Object mapping channel IDs to guild IDs\n* @prop {Collection<Shard>} shards Collection of shards Eris is using\n* @prop {Collection<Guild>} guilds Collection of guilds the bot is in\n* @prop {Object} privateChannelMap Object mapping user IDs to private channel IDs\n* @prop {Collection<PrivateChannel>} privateChannels Collection of private channels the bot is in\n* @prop {Collection<GroupChannel>} groupChannels Collection of group channels the bot is in (user accounts only)\n* @prop {Collection<VoiceConnection>} voiceConnections Extended collection of active VoiceConnections the bot has\n* @prop {Object} guildShardMap Object mapping guild IDs to shard IDs\n* @prop {Number} startTime Timestamp of bot ready event\n* @prop {Collection<UnavailableGuild>} unavailableGuilds Collection of unavailable guilds the bot is in\n* @prop {Number} uptime How long in milliseconds the bot has been up for\n* @prop {ExtendedUser} user The bot user\n* @prop {Collection<User>} users Collection of users the bot sees\n* @prop {Collection<Relationship>} relationships Collection of relationships the bot user has (user accounts only)\n* @prop {Object} userGuildSettings Object mapping guild IDs to individual guild settings for the bot user (user accounts only)\n* @prop {Object} userSettings Object containing the user account settings (user accounts only)\n* @prop {Object} notes Object mapping user IDs to user notes (user accounts only)\n*/",
       "meta": {
         "range": [
-          8051,
-          12221
+          3395,
+          105199
         ],
         "filename": "Client.js",
-        "lineno": 109,
-        "columnno": 4,
+        "lineno": 73,
+        "columnno": 0,
         "path": "/home/runner/work/eris-docs/eris-docs/eris/lib",
         "code": {
-          "id": "astnode100000210",
+          "id": "astnode100000206",
           "name": "Client",
-          "type": "MethodDefinition",
+          "type": "ClassDeclaration",
           "paramnames": [
             "token",
             "options"
@@ -24,12 +24,12 @@
       "name": "Client",
       "longname": "Client",
       "kind": "class",
-      "description": "Create a Client",
-      "scope": "global",
       "classdesc": "Represents the main Eris client",
       "augments": [
         "EventEmitter"
       ],
+      "scope": "global",
+      "description": "Create a Client",
       "params": [
         {
           "type": {
@@ -9759,20 +9759,20 @@
       "___s": true
     },
     {
-      "comment": "/**\n    * Register a command\n    * @arg {String} label The command label\n    * @arg {Function | String | Array<Function | String>} generator A response string, array of functions or strings, or function that generates a string or array of strings when called.\n    * If a function is passed, the function will be passed a Message object and an array of command arguments. The Message object will have an additional property `prefix`, which is the prefix used in the command.\n    * `generator(msg, args)`\n    * @arg {Object} [options] Command options\n    * @arg {Array<String>} [options.aliases] An array of command aliases\n    * @arg {Boolean} [options.argsRequired=false] If arguments are required or not\n    * @arg {Boolean} [options.caseInsensitive=false] Whether the command label (and aliases) is case insensitive or not\n    * @arg {Number} [options.cooldown] The cooldown between command usage in milliseconds\n    * @arg {Object} [options.cooldownExclusions={}] A set of factors that limit where cooldowns are active\n    * @arg {Array<String>} [options.cooldownExclusions.userIDs] An array of user IDs representing users that are not affected by cooldowns.\n    * @arg {Array<String>} [options.cooldownExclusions.guildIDs] An array of guild IDs representing guilds that are not affected by cooldowns.\n    * @arg {Array<String>} [options.cooldownExclusions.channelIDs] An array of channel IDs representing channels that are not affected by cooldowns.\n    * @arg {Function | String} [options.cooldownMessage] A string or a function that returns a string to show when the command is on cooldown.  The function is passed the Message object as a parameter.\n    * @arg {Number} [option.cooldownReturns=0] Number of times to return a message when the command is used during it's cooldown.  Once the cooldown expires this is reset.  Set this to 0 to always return a message.\n    * @arg {Object} [options.defaultSubcommandOptions={}] Default subcommand options. This object takes the same options as a normal Command\n    * @arg {Boolean} [options.deleteCommand=false] Whether to delete the user command message or not\n    * @arg {String} [options.description=\"No description\"] A short description of the command to show in the default help command\n    * @arg {Boolean} [options.dmOnly=false] Whether to prevent the command from being used in guilds or not\n    * @arg {Function | String} [options.errorMessage] A string or a function that returns a string to show if the execution of the command handler somehow fails.  The function is passed the Message object as a parameter.\n    * @arg {String} [options.fullDescription=\"No full description\"] A detailed description of the command to show in the default help command\n    * @arg {Boolean} [options.guildOnly=false] Whether to prevent the command from being used in Direct Messages or not\n    * @arg {Boolean} [options.hidden=false] Whether or not the command should be hidden from the default help command list.\n    * @arg {Object} [options.hooks] A set of functions to be executed at different times throughout the command's processing\n    * @arg {Function} [options.hooks.preCommand] A function that is executed before any permission or cooldown checks is made. The function is passed the command message and arguments as parameters.\n    * @arg {Function} [options.hooks.postCheck] A function that is executed after all checks have cleared, but before the command is executed. The function is passed the command message, arguments, and if command checks were passed as parameters.\n    * @arg {Function} [options.hooks.postExecution] A function that is executed after the command is executed, regardless of the final failed state of the command. The function is passed the command message, arguments, and if execution succeeded as parameters.\n    * @arg {Function} [options.hooks.postCommand] A function that is executed after a response has been posted, and the command has finished processing. The function is passed the command message, arguments, and the response message (if applicable) as parameters.\n    * @arg {Function | String} [options.invalidUsageMessage] A string or a function that returns a string to show when a command was improperly used.  The function is passed the Message object as a parameter.\n    * @arg {Function | String} [options.permissionMessage] A string or a function that returns a string to show when the user doesn't have permissions to use the command.  The function is passed the Message object as a parameter.\n    * @arg {Array<{emoji: String, type: String, response: (Function | String | Array<Function | String>)}>} [options.reactionButtons] An array of objects specifying reaction buttons\n    * `emoji` specifies the button emoji. Custom emojis should be in format `emojiName:emojiID`\n    * `type` specifies the type of the reaction button, either \"edit\" or \"cancel\"\n    * `response` specifies the content to edit the message to when the reaction button is pressed. This accepts the same arguments as the `generator` parameter of this function, but with an extra userID parameter for generator functions (`function(msg, args, userID)`) describing the user that made the reaction\n    * `filter` specifies a function (`function(msg, emoji, userID)`) that filters message reactions. If the function returns false, the reaction is not treated as a valid reaction button response\n    * @arg {Number} [options.reactionButtonTimeout=60000] Time (in milliseconds) to wait before invalidating the command's reaction buttons\n    * @arg {Object} [options.requirements] A set of factors that limit who can call the command\n    * @arg {Function | Array<String>} [options.requirements.userIDs] An array or a function that returns an array of user IDs representing users that can call the command.  The function is passed the Message object as a parameter.\n    * @arg {Function | Object} [options.requirements.permissions] An object or a function that returns an object containing permission keys the user must match to use the command.  The function is passed the Message object as a parameter.\n    * i.e.:\n    * ```\n    * {\n    *   \"administrator\": false,\n    *   \"manageMessages\": true\n    * }\n    * ```\n    * In the above example, the user must not have administrator permissions, but must have manageMessages to use the command\n    * @arg {Function | Array<String>} [options.requirements.roleIDs] An array or a function that returns an array of role IDs that would allow a user to use the command.  The function is passed the Message object as a parameter.\n    * @arg {Function | Array<String>} [options.requirements.roleNames] An array or a function that returns an array of role names that would allow a user to use the command.  The function is passed the Message object as a parameter.\n    * @arg {Function} [options.requirements.custom] A function that accepts a message and returns true if the command should be run\n    * @arg {Boolean} [option.restartCooldown=false] Whether or not to restart a command's cooldown every time it's used.\n    * @arg {String} [options.usage] Details on how to call the command to show in the default help command\n    */",
+      "comment": "/**\n* Represents an command framework command\n* @prop {Object} subcommands Object mapping subcommand labels to Command objects\n* @prop {Command?} parentCommand If this command is also a subcommand, this will refer to its parent Command\n*/",
       "meta": {
         "range": [
-          7456,
-          11879
+          299,
+          30672
         ],
         "filename": "Command.js",
-        "lineno": 66,
-        "columnno": 4,
+        "lineno": 10,
+        "columnno": 0,
         "path": "/home/runner/work/eris-docs/eris-docs/eris/lib/command",
         "code": {
-          "id": "astnode100007535",
+          "id": "astnode100007532",
           "name": "Command",
-          "type": "MethodDefinition",
+          "type": "ClassDeclaration",
           "paramnames": [
             "label",
             "generator",
@@ -9784,9 +9784,9 @@
       "name": "Command",
       "longname": "Command",
       "kind": "class",
-      "description": "Register a command",
-      "scope": "global",
       "classdesc": "Represents an command framework command",
+      "scope": "global",
+      "description": "Register a command",
       "params": [
         {
           "type": {
@@ -10757,20 +10757,20 @@
       "___s": true
     },
     {
-      "comment": "/**\n    * Create a CommandClient\n    * @arg {String} token bot token\n    * @arg {Object} [options] Eris options (same as Client)\n    * @arg {Object} [commandOptions] Command options\n    * @arg {Boolean} [commandOptions.defaultHelpCommand=true] Whether to register the default help command or not\n    * @arg {String} [commandOptions.description=\"An Eris-based Discord bot\"] The description to show in the default help command\n    * @arg {Boolean} [commandOptions.ignoreBots=true] Whether to ignore bot accounts or not\n    * @arg {Boolean} [commandOptions.ignoreSelf=true] Whether to ignore the bot's own account or not\n    * @arg {String} [commandOptions.name=\"<Bot username>\"] The bot name to show in the default help command\n    * @arg {String} [commandOptions.owner=\"an unknown user\"] The owner to show in the default help command\n    * @arg {String | Array<String>} [commandOptions.prefix=\"@mention \"] The bot prefix. Can be either an array of prefixes or a single prefix. \"@mention\" will be automatically replaced with the bot's actual mention\n    * @arg {Object} [commandOptions.defaultCommandOptions={}] Default command options. This object takes the same options as a normal Command\n    */",
+      "comment": "/**\n* Represents an Eris client with the command framework\n* @extends Client\n* @prop {Object} commandAliases Object mapping command label aliases to command labels\n* @prop {Object} commands Object mapping command labels to Command objects\n* @prop {Object} guildPrefixes Object mapping guild IDs to arrays of guild-specific prefixes\n*/",
       "meta": {
         "range": [
-          1718,
-          6670
+          476,
+          24851
         ],
         "filename": "CommandClient.js",
-        "lineno": 29,
-        "columnno": 4,
+        "lineno": 14,
+        "columnno": 0,
         "path": "/home/runner/work/eris-docs/eris-docs/eris/lib/command",
         "code": {
-          "id": "astnode100009745",
+          "id": "astnode100009741",
           "name": "CommandClient",
-          "type": "MethodDefinition",
+          "type": "ClassDeclaration",
           "paramnames": [
             "token",
             "options",
@@ -10781,12 +10781,12 @@
       "name": "CommandClient",
       "longname": "CommandClient",
       "kind": "class",
-      "description": "Create a CommandClient",
-      "scope": "global",
       "classdesc": "Represents an Eris client with the command framework",
       "augments": [
         "Client"
       ],
+      "scope": "global",
+      "description": "Create a CommandClient",
       "params": [
         {
           "type": {
@@ -11580,20 +11580,20 @@
       "___s": true
     },
     {
-      "comment": "",
+      "comment": "/**\n* Represents a shard\n* @extends EventEmitter\n* @prop {Number} id The ID of the shard\n* @prop {Boolean} connecting Whether the shard is connecting\n* @prop {Boolean} ready Whether the shard is ready\n* @prop {Array<String>?} discordServerTrace Debug trace of Discord servers\n* @prop {String} status The status of the shard. \"disconnected\"/\"connecting\"/\"handshaking\"/\"ready\"/\"resuming\"\n* @prop {Number} lastHeartbeatReceived Last time Discord acknowledged a heartbeat, null if shard has not sent heartbeat yet\n* @prop {Number} lastHeartbeatSent Last time shard sent a heartbeat, null if shard has not sent heartbeat yet\n* @prop {Number} latency The current latency between the shard and Discord, in milliseconds\n*/",
       "meta": {
         "range": [
-          1981,
-          2378
+          1942,
+          96949
         ],
         "filename": "Shard.js",
-        "lineno": 55,
-        "columnno": 4,
+        "lineno": 54,
+        "columnno": 0,
         "path": "/home/runner/work/eris-docs/eris-docs/eris/lib/gateway",
         "code": {
-          "id": "astnode100012591",
+          "id": "astnode100012587",
           "name": "Shard",
-          "type": "MethodDefinition",
+          "type": "ClassDeclaration",
           "paramnames": [
             "id",
             "client"
@@ -11603,11 +11603,11 @@
       "name": "Shard",
       "longname": "Shard",
       "kind": "class",
-      "scope": "global",
       "classdesc": "Represents a shard",
       "augments": [
         "EventEmitter"
       ],
+      "scope": "global",
       "properties": [
         {
           "type": {
@@ -14815,20 +14815,20 @@
       "___s": true
     },
     {
-      "comment": "",
+      "comment": "/**\n* Handles API requests\n*/",
       "meta": {
         "range": [
-          467,
-          1322
+          440,
+          19177
         ],
         "filename": "RequestHandler.js",
-        "lineno": 16,
-        "columnno": 4,
+        "lineno": 15,
+        "columnno": 0,
         "path": "/home/runner/work/eris-docs/eris-docs/eris/lib/rest",
         "code": {
-          "id": "astnode100023464",
+          "id": "astnode100023461",
           "name": "RequestHandler",
-          "type": "MethodDefinition",
+          "type": "ClassDeclaration",
           "paramnames": [
             "client",
             "forceQueueing"
@@ -14838,8 +14838,8 @@
       "name": "RequestHandler",
       "longname": "RequestHandler",
       "kind": "class",
-      "scope": "global",
       "classdesc": "Handles API requests",
+      "scope": "global",
       "___id": "T000002R001674",
       "___s": true
     },
@@ -15081,20 +15081,20 @@
       "___s": true
     },
     {
-      "comment": "",
+      "comment": "/**\n* Represents a call\n* @prop {String} id The ID of the call\n* @prop {Number} createdAt Timestamp of the call's creation\n* @prop {GroupChannel} channel The call channel\n* @prop {Collection<VoiceState>} voiceStates The voice states of the call participants\n* @prop {String[]} participants The IDs of the call participants\n* @prop {Number?} endedTimestamp The timestamp of the call end\n* @prop {String[]?} ringing The IDs of people that still have not responded to the call request\n* @prop {String?} region The region of the call server\n* @prop {Boolean} unavailable Whether the call is unavailable or not\n*/",
       "meta": {
         "range": [
-          781,
-          1109
+          751,
+          2486
         ],
         "filename": "Call.js",
-        "lineno": 20,
-        "columnno": 4,
+        "lineno": 19,
+        "columnno": 0,
         "path": "/home/runner/work/eris-docs/eris-docs/eris/lib/structures",
         "code": {
-          "id": "astnode100025712",
+          "id": "astnode100025708",
           "name": "Call",
-          "type": "MethodDefinition",
+          "type": "ClassDeclaration",
           "paramnames": [
             "data",
             "channel"
@@ -15104,8 +15104,8 @@
       "name": "Call",
       "longname": "Call",
       "kind": "class",
-      "scope": "global",
       "classdesc": "Represents a call",
+      "scope": "global",
       "properties": [
         {
           "type": {
@@ -15347,20 +15347,20 @@
       "___s": true
     },
     {
-      "comment": "",
+      "comment": "/**\n* Represents a channel. You also probably want to look at CategoryChannel, GroupChannel, NewsChannel, PrivateChannel, TextChannel, and VoiceChannel.\n* @prop {String} id The ID of the channel\n* @prop {String} mention A string that mentions the channel\n* @prop {Number} type The type of the channel\n* @prop {Client} client The client that initialized the channel\n* @prop {Number} createdAt Timestamp of the channel's creation\n*/",
       "meta": {
         "range": [
-          560,
-          678
+          527,
+          2311
         ],
         "filename": "Channel.js",
-        "lineno": 15,
-        "columnno": 4,
+        "lineno": 14,
+        "columnno": 0,
         "path": "/home/runner/work/eris-docs/eris-docs/eris/lib/structures",
         "code": {
-          "id": "astnode100026056",
+          "id": "astnode100026052",
           "name": "Channel",
-          "type": "MethodDefinition",
+          "type": "ClassDeclaration",
           "paramnames": [
             "data",
             "client"
@@ -15370,8 +15370,8 @@
       "name": "Channel",
       "longname": "Channel",
       "kind": "class",
-      "scope": "global",
       "classdesc": "Represents a channel. You also probably want to look at CategoryChannel, GroupChannel, NewsChannel, PrivateChannel, TextChannel, and VoiceChannel.",
+      "scope": "global",
       "properties": [
         {
           "type": {
@@ -15423,20 +15423,20 @@
       "___s": true
     },
     {
-      "comment": "",
+      "comment": "/**\n* Represents an extended user\n* @extends User\n* @prop {String} email The email of the user\n* @prop {Boolean} verified Whether the account email has been verified\n* @prop {Boolean} mfaEnabled Whether the user has enabled two-factor authentication\n*/",
       "meta": {
         "range": [
-          339,
-          428
+          301,
+          1049
         ],
         "filename": "ExtendedUser.js",
-        "lineno": 13,
-        "columnno": 4,
+        "lineno": 12,
+        "columnno": 0,
         "path": "/home/runner/work/eris-docs/eris-docs/eris/lib/structures",
         "code": {
-          "id": "astnode100026344",
+          "id": "astnode100026340",
           "name": "ExtendedUser",
-          "type": "MethodDefinition",
+          "type": "ClassDeclaration",
           "paramnames": [
             "data",
             "client"
@@ -15446,11 +15446,11 @@
       "name": "ExtendedUser",
       "longname": "ExtendedUser",
       "kind": "class",
-      "scope": "global",
       "classdesc": "Represents an extended user",
       "augments": [
         "User"
       ],
+      "scope": "global",
       "properties": [
         {
           "type": {
@@ -15484,20 +15484,20 @@
       "___s": true
     },
     {
-      "comment": "",
+      "comment": "/**\n* [USER ACCOUNT] Represents a group channel. See PrivateChannel docs for additional properties.\n* @extends PrivateChannel\n* @prop {String} id The ID of the channel\n* @prop {String} mention A string that mentions the channel\n* @prop {Call?} call The current group call, if any\n* @prop {Call?} lastCall The previous group call, if any\n* @prop {Collection<User>} recipients The recipients in this private channel\n* @prop {String} name The name of the group channel\n* @prop {String?} icon The hash of the group channel icon\n* @prop {String?} iconURL The URL of the group channel icon\n* @prop {String} ownerID The ID of the user that is the group owner\n*/",
       "meta": {
         "range": [
-          917,
-          1241
+          853,
+          3344
         ],
         "filename": "GroupChannel.js",
-        "lineno": 22,
-        "columnno": 4,
+        "lineno": 21,
+        "columnno": 0,
         "path": "/home/runner/work/eris-docs/eris-docs/eris/lib/structures",
         "code": {
-          "id": "astnode100026489",
+          "id": "astnode100026485",
           "name": "GroupChannel",
-          "type": "MethodDefinition",
+          "type": "ClassDeclaration",
           "paramnames": [
             "data",
             "client"
@@ -15507,11 +15507,11 @@
       "name": "GroupChannel",
       "longname": "GroupChannel",
       "kind": "class",
-      "scope": "global",
       "classdesc": "[USER ACCOUNT] Represents a group channel. See PrivateChannel docs for additional properties.",
       "augments": [
         "PrivateChannel"
       ],
+      "scope": "global",
       "properties": [
         {
           "type": {
@@ -15844,20 +15844,20 @@
       "___s": true
     },
     {
-      "comment": "",
+      "comment": "/**\n* Represents a guild\n* @prop {String} id The ID of the guild\n* @prop {Number} createdAt Timestamp of the guild's creation\n* @prop {String} name The name of the guild\n* @prop {Number} verificationLevel The guild verification level\n* @prop {String} region The region of the guild\n* @prop {String?} icon The hash of the guild icon, or null if no icon\n* @prop {String?} afkChannelID The ID of the AFK voice channel\n* @prop {Number} afkTimeout The AFK timeout in seconds\n* @prop {Number} defaultNotifications The default notification settings for the guild. 0 is \"All Messages\", 1 is \"Only @mentions\"\n* @prop {Number} mfaLevel The admin 2FA level for the guild. 0 is not required, 1 is required\n* @prop {Number} joinedAt Timestamp of when the bot account joined the guild\n* @prop {String} ownerID The ID of the user that is the guild owner\n* @prop {String?} systemChannelID The ID of the default channel for system messages (built-in join messages and boost messages)\n* @prop {String?} splash The hash of the guild splash image, or null if no splash (VIP only)\n* @prop {String?} banner The hash of the guild banner image, or null if no banner (VIP only)\n* @prop {Boolean} unavailable Whether the guild is unavailable or not\n* @prop {Boolean} large Whether the guild is \"large\" by \"some Discord standard\"\n* @prop {Number} maxPresences The maximum number of people that can be online in a guild at once (returned from REST API only)\n* @prop {Collection<VoiceState>} voiceStates Collection of voice states in the guild\n* @prop {Collection<GuildChannel>} channels Collection of Channels in the guild\n* @prop {Collection<Member>} members Collection of Members in the guild\n* @prop {Number} memberCount Number of members in the guild\n* @prop {Collection<Role>} roles Collection of Roles in the guild\n* @prop {Shard} shard The Shard that owns the guild\n* @prop {String[]} features An array of guild feature strings\n* @prop {Object[]} emojis An array of guild emoji objects\n* @prop {String?} iconURL The URL of the guild's icon\n* @prop {String?} bannerURL The URL of the guild's banner image\n* @prop {String?} splashURL The URL of the guild's splash image\n* @prop {Number} explicitContentFilter The explicit content filter level for the guild. 0 is off, 1 is on for people without roles, 2 is on for all\n* @prop {Number} premiumTier Nitro boost level of the guild\n* @prop {Number?} premiumSubscriptionCount The total number of users currently boosting this guild\n* @prop {String?} vanityURL The vanity URL of the guild (VIP only)\n* @prop {String} preferredLocale Preferred \"PUBLIC\" guild language used in server discovery and notices from Discord\n* @prop {String?} description The description for the guild (VIP only)\n* @prop {Number} maxMembers The maximum amount of members for the guild\n* @prop {String?} publicUpdatesChannelID ID of the guild's updates channel if the guild has \"PUBLIC\" features\n* @prop {String?} rulesChannelID The channel where \"PUBLIC\" guilds display rules and/or guidelines\n* @prop {Number?} maxVideoChannelUsers The max number of users allowed in a video channel\n* @prop {Boolean?} widgetEnabled Whether the guild widget is enabled. REST only.\n* @prop {Number?} widgetChannelID The channel id that the widget will generate an invite to. REST only.\n* @prop {Number?} approximateMemberCount The approximate number of members in the guild (REST only)\n* @prop {Number?} approximatePresenceCount The approximate number of presences in the guild (REST only)\n*/",
       "meta": {
         "range": [
-          3847,
-          7326
+          3816,
+          31673
         ],
         "filename": "Guild.js",
-        "lineno": 59,
-        "columnno": 4,
+        "lineno": 58,
+        "columnno": 0,
         "path": "/home/runner/work/eris-docs/eris-docs/eris/lib/structures",
         "code": {
-          "id": "astnode100026799",
+          "id": "astnode100026795",
           "name": "Guild",
-          "type": "MethodDefinition",
+          "type": "ClassDeclaration",
           "paramnames": [
             "data",
             "client"
@@ -15867,8 +15867,8 @@
       "name": "Guild",
       "longname": "Guild",
       "kind": "class",
-      "scope": "global",
       "classdesc": "Represents a guild",
+      "scope": "global",
       "properties": [
         {
           "type": {
@@ -19386,20 +19386,20 @@
       "___s": true
     },
     {
-      "comment": "",
+      "comment": "/**\n* Represents a guild audit log entry describing a moderation action\n* @prop {String} id The ID of the entry\n* @prop {Guild} guild The guild containing the entry\n* @prop {Number} actionType The action type of the entry. See Constants.AuditLogActions for more details\n* @prop {String?} reason The reason for the action\n* @prop {User} user The user that performed the action\n* @prop {String} targetID The ID of the action target\n* @prop {(CategoryChannel | Guild | Member | Invite | Role | Object | TextChannel | VoiceChannel | NewsChannel)?} target The object of the action target\n* If the item is not cached, this property will be null\n* If the action targets a guild, this could be a Guild object\n* If the action targets a guild channel, this could be a CategoryChannel, TextChannel, or VoiceChannel object\n* If the action targets a member, this could be a Member object\n* If the action targets a role, this could be a Role object\n* If the action targets an invite, this is an Invite object\n* If the action targets a webhook, this is null\n* If the action targets a emoji, this could be an emoji Object\n* If the action targets a message, this is a User object\n* @prop {Object?} before The properties of the targeted object before the action was taken\n* For example, if a channel was renamed from #general to #potato, this would be `{name: \"general\"}``\n* @prop {Object?} after The properties of the targeted object after the action was taken\n* For example, if a channel was renamed from #general to #potato, this would be `{name: \"potato\"}``\n* @prop {Number?} count The number of messages deleted, action type 72 (MESSAGE_DELETE) only\n* @prop {(CategoryChannel | TextChannel | VoiceChannel)?} channel The channel containing the deleted messages, action type 72 (MESSAGE_DELETE) only\n* @prop {Number?} deleteMemberDays The number of days of inactivity to prune for, action type 21 (MEMBER_PRUNE) only\n* @prop {Number?} membersRemoved The number of members pruned from the server, action type 21 (MEMBER_PRUNE) only\n* @prop {(Member | Object)?} member The member described by the permission overwrite, action types 13-15 (CHANNEL\\_OVERWRITE\\_CREATE/UPDATE/DELETE) only. If the member is not cached, this could be {id: String}\n* @prop {(Role | Object)?} role The role described by the permission overwrite, action types 13-15 (CHANNEL\\_OVERWRITE\\_CREATE/UPDATE/DELETE) only. If the role is not cached, this could be {id: String, name: String}\n*/",
       "meta": {
         "range": [
-          2624,
-          4413
+          2580,
+          6618
         ],
         "filename": "GuildAuditLogEntry.js",
-        "lineno": 37,
-        "columnno": 4,
+        "lineno": 36,
+        "columnno": 0,
         "path": "/home/runner/work/eris-docs/eris-docs/eris/lib/structures",
         "code": {
-          "id": "astnode100028875",
+          "id": "astnode100028871",
           "name": "GuildAuditLogEntry",
-          "type": "MethodDefinition",
+          "type": "ClassDeclaration",
           "paramnames": [
             "data",
             "guild"
@@ -19409,8 +19409,8 @@
       "name": "GuildAuditLogEntry",
       "longname": "GuildAuditLogEntry",
       "kind": "class",
-      "scope": "global",
       "classdesc": "Represents a guild audit log entry describing a moderation action",
+      "scope": "global",
       "properties": [
         {
           "type": {
@@ -19574,20 +19574,20 @@
       "___s": true
     },
     {
-      "comment": "",
+      "comment": "/**\n* Represents a guild channel. You also probably want to look at CategoryChannel, NewsChannel, StoreChannel, TextChannel, and VoiceChannel.\n* @extends Channel\n* @prop {String} id The ID of the channel\n* @prop {String} mention A string that mentions the channel\n* @prop {Number} type The type of the channel\n* @prop {Guild} guild The guild that owns the channel\n* @prop {String?} parentID The ID of the category this channel belongs to\n* @prop {String} name The name of the channel\n* @prop {Number} position The position of the channel\n* @prop {Boolean} nsfw Whether the channel is an NSFW channel or not\n* @prop {Collection<PermissionOverwrite>} permissionOverwrites Collection of PermissionOverwrites in this channel\n*/",
       "meta": {
         "range": [
-          1022,
-          1212
+          981,
+          6049
         ],
         "filename": "GuildChannel.js",
-        "lineno": 23,
-        "columnno": 4,
+        "lineno": 22,
+        "columnno": 0,
         "path": "/home/runner/work/eris-docs/eris-docs/eris/lib/structures",
         "code": {
-          "id": "astnode100029497",
+          "id": "astnode100029493",
           "name": "GuildChannel",
-          "type": "MethodDefinition",
+          "type": "ClassDeclaration",
           "paramnames": [
             "data",
             "client"
@@ -19597,11 +19597,11 @@
       "name": "GuildChannel",
       "longname": "GuildChannel",
       "kind": "class",
-      "scope": "global",
       "classdesc": "Represents a guild channel. You also probably want to look at CategoryChannel, NewsChannel, StoreChannel, TextChannel, and VoiceChannel.",
       "augments": [
         "Channel"
       ],
+      "scope": "global",
       "properties": [
         {
           "type": {
@@ -20137,20 +20137,20 @@
       "___s": true
     },
     {
-      "comment": "",
+      "comment": "/**\n* Represents a guild integration\n* @prop {String} id The ID of the integration\n* @prop {Number} createdAt Timestamp of the guild integration's creation\n* @prop {String} name The name of the integration\n* @prop {String} type The type of the integration\n* @prop {String} roleID The ID of the role connected to the integration\n* @prop {User} user The user connected to the integration\n* @prop {Object} account Info on the integration account\n* @prop {String} account.id The ID of the integration account\n* @prop {String} account.name The name of the integration account\n* @prop {Boolean} enabled Whether the integration is enabled or not\n* @prop {Boolean} syncing Whether the integration is syncing or not\n* @prop {Number} expireBehavior behavior of expired subscriptions\n* @prop {Number} expireGracePeriod grace period for expired subscriptions\n* @prop {Boolean} enableEmoticons Whether integration emoticons are enabled or not\n* @prop {Number} subscriberCount number of subscribers\n* @prop {Number} syncedAt Unix timestamp of last integration sync\n*/",
       "meta": {
         "range": [
-          1144,
-          1503
+          1102,
+          3274
         ],
         "filename": "GuildIntegration.js",
-        "lineno": 25,
-        "columnno": 4,
+        "lineno": 24,
+        "columnno": 0,
         "path": "/home/runner/work/eris-docs/eris-docs/eris/lib/structures",
         "code": {
-          "id": "astnode100029962",
+          "id": "astnode100029958",
           "name": "GuildIntegration",
-          "type": "MethodDefinition",
+          "type": "ClassDeclaration",
           "paramnames": [
             "data",
             "guild"
@@ -20160,8 +20160,8 @@
       "name": "GuildIntegration",
       "longname": "GuildIntegration",
       "kind": "class",
-      "scope": "global",
       "classdesc": "Represents a guild integration",
+      "scope": "global",
       "properties": [
         {
           "type": {
@@ -20474,20 +20474,20 @@
       "___s": true
     },
     {
-      "comment": "",
+      "comment": "/**\n* Represents a GuildPreview structure\n* @extends Base\n* @prop {String} id The ID of the guild\n* @prop {String} name The name of the guild\n\n* @prop {String?} icon The hash of the guild icon, or null if no icon\n* @prop {String?} description The description for the guild (VIP only)\n* @prop {String?} splash The hash of the guild splash image, or null if no splash (VIP only)\n* @prop {String?} discoverySplash The description for the guild (VIP only)\n* @prop {String[]} features An array of guild feature strings\n* @prop {Number} approximateMemberCount The **approximate** number of members in the guild\n* @prop {Number} approximatePresenceCount The **approximate** number of presences in the guild\n* @prop {Object[]} emojis An array of guild emoji objects\n* @prop {String?} iconURL The URL of the guild's icon\n*/",
       "meta": {
         "range": [
-          952,
-          1452
+          914,
+          2986
         ],
         "filename": "GuildPreview.js",
-        "lineno": 23,
-        "columnno": 4,
+        "lineno": 22,
+        "columnno": 0,
         "path": "/home/runner/work/eris-docs/eris-docs/eris/lib/structures",
         "code": {
-          "id": "astnode100030253",
+          "id": "astnode100030249",
           "name": "GuildPreview",
-          "type": "MethodDefinition",
+          "type": "ClassDeclaration",
           "paramnames": [
             "data",
             "client"
@@ -20497,11 +20497,11 @@
       "name": "GuildPreview",
       "longname": "GuildPreview",
       "kind": "class",
-      "scope": "global",
       "classdesc": "Represents a GuildPreview structure",
       "augments": [
         "Base"
       ],
+      "scope": "global",
       "properties": [
         {
           "type": {
@@ -20722,20 +20722,20 @@
       "___s": true
     },
     {
-      "comment": "",
+      "comment": "/**\n* Represents an invite. Some properties are only available when fetching invites from channels, which requires the Manage Channel permission.\n* @prop {String} code The invite code\n* @prop {Object} channel Info on the invite channel\n* @prop {String} channel.id The ID of the invite's channel\n* @prop {String?} channel.name The name of the invite's channel\n* @prop {Number} channel.type The type of the invite's channel\n* @prop {String?} channel.icon The icon of a channel (group dm)\n* @prop {Object?} guild Info on the invite guild\n* @prop {String} guild.id The ID of the invite's guild\n* @prop {String} guild.name The name of the invite's guild\n* @prop {String?} guild.splash The hash of the invite splash screen\n* @prop {String?} guild.banner The hash of the guild banner\n* @prop {String?} guild.description The description of the invite's guild\n* @prop {String?} guild.icon The hash of the guild icon\n* @prop {String[]} guild.features An array of the invite's guild's features\n* @prop {Number?} guild.verificationLevel The verification level of the invite's guild\n* @prop {String?} guild.vanityUrlCode The vanity url of the invite's guild\n* @prop {User?} inviter The invite creator\n* @prop {Number?} uses The number of invite uses\n* @prop {Number?} maxUses The max number of invite uses\n* @prop {Number?} maxAge How long the invite lasts in seconds\n* @prop {Boolean?} temporary Whether the invite grants temporary membership or not\n* @prop {Number?} createdAt Timestamp of invite creation\n* @prop {Number?} presenceCount The **approximate** presence count for the guild\n* @prop {Number?} memberCount The **approximate** member count for the guild\n*/",
       "meta": {
         "range": [
-          1736,
-          3089
+          1704,
+          3811
         ],
         "filename": "Invite.js",
-        "lineno": 33,
-        "columnno": 4,
+        "lineno": 32,
+        "columnno": 0,
         "path": "/home/runner/work/eris-docs/eris-docs/eris/lib/structures",
         "code": {
-          "id": "astnode100030511",
+          "id": "astnode100030507",
           "name": "Invite",
-          "type": "MethodDefinition",
+          "type": "ClassDeclaration",
           "paramnames": [
             "data",
             "client"
@@ -20745,8 +20745,8 @@
       "name": "Invite",
       "longname": "Invite",
       "kind": "class",
-      "scope": "global",
       "classdesc": "Represents an invite. Some properties are only available when fetching invites from channels, which requires the Manage Channel permission.",
+      "scope": "global",
       "properties": [
         {
           "type": {
@@ -21039,20 +21039,20 @@
       "___s": true
     },
     {
-      "comment": "",
+      "comment": "/**\n* Represents a server member\n* @prop {String} id The ID of the member\n* @prop {String} mention A string that mentions the member\n* @prop {Guild} guild The guild the member is in\n* @prop {Number} joinedAt Timestamp of when the member joined the guild\n* @prop {String} status The member's status. Either \"online\", \"idle\", \"dnd\", or \"offline\"\n* @prop {Object?} clientStatus The member's per-client status\n* @prop {String} clientStatus.web The member's status on web. Either \"online\", \"idle\", \"dnd\", or \"offline\". Will be \"online\" for bots\n* @prop {String} clientStatus.desktop The member's status on desktop. Either \"online\", \"idle\", \"dnd\", or \"offline\". Will be \"offline\" for bots\n* @prop {String} clientStatus.mobile The member's status on mobile. Either \"online\", \"idle\", \"dnd\", or \"offline\". Will be \"offline\" for bots\n* @prop {Object[]?} activities The member's current activities\n* @prop {Object?} game The active game the member is playing\n* @prop {String} game.name The name of the active game\n* @prop {Number} game.type The type of the active game (0 is default, 1 is Twitch, 2 is YouTube)\n* @prop {String?} game.url The url of the active game\n* @prop {VoiceState} voiceState The voice state of the member\n* @prop {String?} nick The server nickname of the member\n* @prop {String[]} roles An array of role IDs this member is a part of\n* @prop {User} user The user object of the member\n* @prop {Permission} permission The guild-wide permissions of the member\n* @prop {String} defaultAvatar The hash for the default avatar of a user if there is no avatar set\n* @prop {Number} createdAt Timestamp of user creation\n* @prop {Boolean} bot Whether the user is an OAuth bot or not\n* @prop {String} username The username of the user\n* @prop {String} discriminator The discriminator of the user\n* @prop {String?} avatar The hash of the user's avatar, or null if no avatar\n* @prop {String} defaultAvatarURL The URL of the user's default avatar\n* @prop {String} avatarURL The URL of the user's avatar which can be either a JPG or GIF\n* @prop {String} staticAvatarURL The URL of the user's avatar (always a JPG)\n* @prop {Number} premiumSince Timestamp of when the member boosted the guild\n*/",
       "meta": {
         "range": [
-          2435,
-          3190
+          2403,
+          8945
         ],
         "filename": "Member.js",
-        "lineno": 42,
-        "columnno": 4,
+        "lineno": 41,
+        "columnno": 0,
         "path": "/home/runner/work/eris-docs/eris-docs/eris/lib/structures",
         "code": {
-          "id": "astnode100030844",
+          "id": "astnode100030840",
           "name": "Member",
-          "type": "MethodDefinition",
+          "type": "ClassDeclaration",
           "paramnames": [
             "data",
             "guild",
@@ -21063,8 +21063,8 @@
       "name": "Member",
       "longname": "Member",
       "kind": "class",
-      "scope": "global",
       "classdesc": "Represents a server member",
+      "scope": "global",
       "properties": [
         {
           "type": {
@@ -21748,20 +21748,20 @@
       "___s": true
     },
     {
-      "comment": "",
+      "comment": "/**\n* Represents a message\n* @prop {String} id The ID of the message\n* @prop {PrivateChannel | TextChannel | NewsChannel} channel The channel the message is in\n* @prop {String} [guildID] The ID of the guild this message is in (undefined if in DMs)\n* @prop {Number} timestamp Timestamp of message creation\n* @prop {Number} type The type of the message\n* @prop {User} author The message author\n* @prop {Member?} member The message author with server-specific data\n* @prop {User[]} mentions Array of mentioned users\n* @prop {String} content Message content\n* @prop {String?} cleanContent Message content with mentions replaced by names, and @everyone/@here escaped\n* @prop {String[]} roleMentions Array of mentioned roles' ids\n* @prop {String[]} channelMentions Array of mentions channels' ids\n* @prop {Number?} editedTimestamp Timestamp of latest message edit\n* @prop {Boolean} tts Whether to play the message using TTS or not\n* @prop {Boolean} mentionEveryone Whether the message mentions everyone/here or not\n* @prop {Object?} messageReference An object containing the reference to the original message if it is a crossposted message\n* @prop {String} messageReference.messageID The id of the original message this message was crossposted from\n* @prop {String} messageReference.channelID The id of the channel this message was crossposted from\n* @prop {String} messageReference.guildID The id of the guild this message was crossposted from\n* @prop {Number} flags Message flags (see constants)\n* @prop {Object[]} attachments Array of attachments\n* @prop {Object[]} embeds Array of embeds\n* @prop {Object?} activity The activity specified in the message\n* @prop {Object?} application The application of the activity in the message\n* @prop {Object} reactions An object containing the reactions on the message\n* @prop {Number} reactions.count The number of times the reaction was used\n* @prop {String?} webhookID ID of the webhook that sent the message\n* @prop {Boolean} reactions.me Whether or not the bot user did the reaction\n* @prop {Boolean} pinned Whether the message is pinned or not\n* @prop {Command?} command The Command used in the Message, if any (CommandClient only)\n*/",
       "meta": {
         "range": [
-          2390,
-          8200
+          2357,
+          16747
         ],
         "filename": "Message.js",
-        "lineno": 42,
-        "columnno": 4,
+        "lineno": 41,
+        "columnno": 0,
         "path": "/home/runner/work/eris-docs/eris-docs/eris/lib/structures",
         "code": {
-          "id": "astnode100031749",
+          "id": "astnode100031745",
           "name": "Message",
-          "type": "MethodDefinition",
+          "type": "ClassDeclaration",
           "paramnames": [
             "data",
             "client"
@@ -21771,8 +21771,8 @@
       "name": "Message",
       "longname": "Message",
       "kind": "class",
-      "scope": "global",
       "classdesc": "Represents a message",
+      "scope": "global",
       "properties": [
         {
           "type": {
@@ -22674,20 +22674,20 @@
       "___s": true
     },
     {
-      "comment": "",
+      "comment": "/**\n* Represents a guild news channel\n* @extends TextChannel\n* @prop {String} id The ID of the channel\n* @prop {String} mention A string that mentions the channel\n* @prop {Number} type The type of the channel\n* @prop {Guild} guild The guild that owns the channel\n* @prop {String?} parentID The ID of the category this channel belongs to\n* @prop {String} name The name of the channel\n* @prop {Number} position The position of the channel\n* @prop {Boolean} nsfw Whether the channel is an NSFW channel or not\n* @prop {Collection<PermissionOverwrite>} permissionOverwrites Collection of PermissionOverwrites in this channel\n* @prop {Collection<Message>} messages Collection of Messages in this channel\n* @prop {String} lastMessageID The ID of the last message in this channel\n* @prop {Number} lastPinTimestamp The timestamp of the last pinned message\n* @prop {String?} topic The topic of the channel\n* @prop {Number} rateLimitPerUser The ratelimit of the channel, in seconds. 0 means no ratelimit is enabled. Always 0 in NewsChannel\n*/",
       "meta": {
         "range": [
-          1138,
-          1288
+          1094,
+          1966
         ],
         "filename": "NewsChannel.js",
-        "lineno": 24,
-        "columnno": 4,
+        "lineno": 23,
+        "columnno": 0,
         "path": "/home/runner/work/eris-docs/eris-docs/eris/lib/structures",
         "code": {
-          "id": "astnode100033486",
+          "id": "astnode100033482",
           "name": "NewsChannel",
-          "type": "MethodDefinition",
+          "type": "ClassDeclaration",
           "paramnames": [
             "data",
             "guild",
@@ -22698,11 +22698,11 @@
       "name": "NewsChannel",
       "longname": "NewsChannel",
       "kind": "class",
-      "scope": "global",
       "classdesc": "Represents a guild news channel",
       "augments": [
         "TextChannel"
       ],
+      "scope": "global",
       "properties": [
         {
           "type": {
@@ -22942,20 +22942,20 @@
       "___s": true
     },
     {
-      "comment": "",
+      "comment": "/**\n* Represents a calculated permissions number\n* @prop {Number} allow The allowed permissions number\n* @prop {Number} deny The denied permissions number\n* @prop {Object} json A JSON representation of the permissions number.\n* If a permission key isn't there, it is not set by this permission.\n* If a permission key is false, it is denied by the permission.\n* If a permission key is true, it is allowed by the permission.\n* i.e.:\n* {\n*   \"readMessages\": true,\n*   \"sendMessages\": true,\n*   \"manageMessages\": false\n* }\n* In the above example, readMessages and sendMessages are allowed permissions, and manageMessages is denied. Everything else is not explicitly set.\n* [A full list of permission nodes can be found on the docs reference page](/Eris/docs/reference)\n*/",
       "meta": {
         "range": [
-          899,
-          1006
+          863,
+          2033
         ],
         "filename": "Permission.js",
-        "lineno": 24,
-        "columnno": 4,
+        "lineno": 23,
+        "columnno": 0,
         "path": "/home/runner/work/eris-docs/eris-docs/eris/lib/structures",
         "code": {
-          "id": "astnode100033581",
+          "id": "astnode100033577",
           "name": "Permission",
-          "type": "MethodDefinition",
+          "type": "ClassDeclaration",
           "paramnames": [
             "allow",
             "deny"
@@ -22965,8 +22965,8 @@
       "name": "Permission",
       "longname": "Permission",
       "kind": "class",
-      "scope": "global",
       "classdesc": "Represents a calculated permissions number",
+      "scope": "global",
       "properties": [
         {
           "type": {
@@ -23053,20 +23053,20 @@
       "___s": true
     },
     {
-      "comment": "",
+      "comment": "/**\n* Represents a permission overwrite\n* @extends Permission\n* @prop {String} id The ID of the overwrite\n* @prop {String} type The type of the overwrite, either \"member\" or \"role\"\n*/",
       "meta": {
         "range": [
-          295,
-          416
+          244,
+          533
         ],
         "filename": "PermissionOverwrite.js",
-        "lineno": 12,
-        "columnno": 4,
+        "lineno": 11,
+        "columnno": 0,
         "path": "/home/runner/work/eris-docs/eris-docs/eris/lib/structures",
         "code": {
-          "id": "astnode100033728",
+          "id": "astnode100033724",
           "name": "PermissionOverwrite",
-          "type": "MethodDefinition",
+          "type": "ClassDeclaration",
           "paramnames": [
             "data"
           ]
@@ -23075,11 +23075,11 @@
       "name": "PermissionOverwrite",
       "longname": "PermissionOverwrite",
       "kind": "class",
-      "scope": "global",
       "classdesc": "Represents a permission overwrite",
       "augments": [
         "Permission"
       ],
+      "scope": "global",
       "properties": [
         {
           "type": {
@@ -23104,20 +23104,20 @@
       "___s": true
     },
     {
-      "comment": "",
+      "comment": "/**\n* Represents a private channel\n* @extends Channel\n* @prop {String} id The ID of the channel\n* @prop {String} mention A string that mentions the channel\n* @prop {Number} type The type of the channel\n* @prop {String} lastMessageID The ID of the last message in this channel\n* @prop {User} recipient The recipient in this private channel (private channels only)\n* @prop {Collection<Message>} messages Collection of Messages in this channel\n*/",
       "meta": {
         "range": [
-          773,
-          1212
+          730,
+          8808
         ],
         "filename": "PrivateChannel.js",
-        "lineno": 21,
-        "columnno": 4,
+        "lineno": 20,
+        "columnno": 0,
         "path": "/home/runner/work/eris-docs/eris-docs/eris/lib/structures",
         "code": {
-          "id": "astnode100033828",
+          "id": "astnode100033824",
           "name": "PrivateChannel",
-          "type": "MethodDefinition",
+          "type": "ClassDeclaration",
           "paramnames": [
             "data",
             "client"
@@ -23127,11 +23127,11 @@
       "name": "PrivateChannel",
       "longname": "PrivateChannel",
       "kind": "class",
-      "scope": "global",
       "classdesc": "Represents a private channel",
       "augments": [
         "Channel"
       ],
+      "scope": "global",
       "properties": [
         {
           "type": {
@@ -24286,20 +24286,20 @@
       "___s": true
     },
     {
-      "comment": "",
+      "comment": "/**\n* [USER ACCOUNT] Represents a Relationship\n* @prop {User} user The other user in the relationship\n* @prop {Number} type The type of relationship. 1 is friend, 2 is block, 3 is incoming request, 4 is outgoing request\n* @prop {String} status The other user's status. Either \"online\", \"idle\", or \"offline\"\n* @prop {Object?} game The active game the other user is playing\n* @prop {String} game.name The name of the active game\n* @prop {Number} game.type The type of the active game (0 is default, 1 is Twitch, 2 is YouTube)\n* @prop {String?} game.url The url of the active game\n*/",
       "meta": {
         "range": [
-          667,
-          890
+          629,
+          1350
         ],
         "filename": "Relationship.js",
-        "lineno": 16,
-        "columnno": 4,
+        "lineno": 15,
+        "columnno": 0,
         "path": "/home/runner/work/eris-docs/eris-docs/eris/lib/structures",
         "code": {
-          "id": "astnode100034317",
+          "id": "astnode100034313",
           "name": "Relationship",
-          "type": "MethodDefinition",
+          "type": "ClassDeclaration",
           "paramnames": [
             "data",
             "client"
@@ -24309,8 +24309,8 @@
       "name": "Relationship",
       "longname": "Relationship",
       "kind": "class",
-      "scope": "global",
       "classdesc": "[USER ACCOUNT] Represents a Relationship",
+      "scope": "global",
       "properties": [
         {
           "type": {
@@ -24382,20 +24382,20 @@
       "___s": true
     },
     {
-      "comment": "",
+      "comment": "/**\n* Represents a role\n* @prop {String} id The ID of the role\n* @prop {Number} createdAt Timestamp of the role's creation\n* @prop {Guild} guild The guild that owns the role\n* @prop {String} mention A string that mentions the role\n* @prop {Number} createdAt Timestamp of role creation\n* @prop {String} name The name of the role\n* @prop {Boolean} mentionable Whether the role is mentionable or not\n* @prop {Boolean} managed Whether a guild integration manages this role or not\n* @prop {Boolean} hoist Whether users with this role are hoisted in the user list or not\n* @prop {Number} color The hex color of the role in base 10\n* @prop {Number} position The position of the role\n* @prop {Permission} permissions The permissions representation of the role\n*/",
       "meta": {
         "range": [
-          877,
-          988
+          847,
+          3547
         ],
         "filename": "Role.js",
-        "lineno": 22,
-        "columnno": 4,
+        "lineno": 21,
+        "columnno": 0,
         "path": "/home/runner/work/eris-docs/eris-docs/eris/lib/structures",
         "code": {
-          "id": "astnode100034463",
+          "id": "astnode100034459",
           "name": "Role",
-          "type": "MethodDefinition",
+          "type": "ClassDeclaration",
           "paramnames": [
             "data",
             "guild"
@@ -24405,8 +24405,8 @@
       "name": "Role",
       "longname": "Role",
       "kind": "class",
-      "scope": "global",
       "classdesc": "Represents a role",
+      "scope": "global",
       "properties": [
         {
           "type": {
@@ -24892,20 +24892,20 @@
       "___s": true
     },
     {
-      "comment": "",
+      "comment": "/**\n* Represents a guild text channel\n* @extends GuildChannel\n* @prop {String} id The ID of the channel\n* @prop {String} mention A string that mentions the channel\n* @prop {Number} type The type of the channel\n* @prop {Guild} guild The guild that owns the channel\n* @prop {String?} parentID The ID of the category this channel belongs to\n* @prop {String} name The name of the channel\n* @prop {Number} position The position of the channel\n* @prop {Boolean} nsfw Whether the channel is an NSFW channel or not\n* @prop {Collection<PermissionOverwrite>} permissionOverwrites Collection of PermissionOverwrites in this channel\n* @prop {Collection<Message>} messages Collection of Messages in this channel\n* @prop {String} lastMessageID The ID of the last message in this channel\n* @prop {Number} lastPinTimestamp The timestamp of the last pinned message\n* @prop {String?} topic The topic of the channel\n* @prop {Number} rateLimitPerUser The ratelimit of the channel, in seconds. 0 means no ratelimit is enabled\n*/",
       "meta": {
         "range": [
-          1205,
-          1685
+          1160,
+          12314
         ],
         "filename": "TextChannel.js",
-        "lineno": 26,
-        "columnno": 4,
+        "lineno": 25,
+        "columnno": 0,
         "path": "/home/runner/work/eris-docs/eris-docs/eris/lib/structures",
         "code": {
-          "id": "astnode100034798",
+          "id": "astnode100034794",
           "name": "TextChannel",
-          "type": "MethodDefinition",
+          "type": "ClassDeclaration",
           "paramnames": [
             "data",
             "client",
@@ -24916,11 +24916,11 @@
       "name": "TextChannel",
       "longname": "TextChannel",
       "kind": "class",
-      "scope": "global",
       "classdesc": "Represents a guild text channel",
       "augments": [
         "GuildChannel"
       ],
+      "scope": "global",
       "properties": [
         {
           "type": {
@@ -26576,20 +26576,20 @@
       "___s": true
     },
     {
-      "comment": "",
+      "comment": "/**\n* Represents a guild\n* @prop {String} id The ID of the guild\n* @prop {Boolean} unavailable Whether the guild is unavailable or not\n* @prop {Shard} shard The Shard that owns the guild\n*/",
       "meta": {
         "range": [
-          280,
-          455
+          238,
+          579
         ],
         "filename": "UnavailableGuild.js",
-        "lineno": 12,
-        "columnno": 4,
+        "lineno": 11,
+        "columnno": 0,
         "path": "/home/runner/work/eris-docs/eris-docs/eris/lib/structures",
         "code": {
-          "id": "astnode100035434",
+          "id": "astnode100035430",
           "name": "UnavailableGuild",
-          "type": "MethodDefinition",
+          "type": "ClassDeclaration",
           "paramnames": [
             "data",
             "client"
@@ -26599,8 +26599,8 @@
       "name": "UnavailableGuild",
       "longname": "UnavailableGuild",
       "kind": "class",
-      "scope": "global",
       "classdesc": "Represents a guild",
+      "scope": "global",
       "properties": [
         {
           "type": {
@@ -26634,20 +26634,20 @@
       "___s": true
     },
     {
-      "comment": "",
+      "comment": "/**\n* Represents a user\n* @prop {String} id The ID of the user\n* @prop {Number} createdAt Timestamp of the user's creation\n* @prop {String} mention A string that mentions the user\n* @prop {String} defaultAvatar The hash for the default avatar of a user if there is no avatar set\n* @prop {Number} createdAt Timestamp of user creation\n* @prop {Boolean} bot Whether the user is an OAuth bot or not\n* @prop {String} username The username of the user\n* @prop {String} discriminator The discriminator of the user\n* @prop {String?} avatar The hash of the user's avatar, or null if no avatar\n* @prop {String} defaultAvatarURL The URL of the user's default avatar\n* @prop {String} avatarURL The URL of the user's avatar which can be either a JPG or GIF\n* @prop {String} staticAvatarURL The URL of the user's avatar (always a JPG)\n* @prop {Boolean} system Whether the user is an official Discord system user (e.g. urgent messages)\n* @prop {Number?} publicFlags Publicly vicible flags for this user\n*/",
       "meta": {
         "range": [
-          1117,
-          1449
+          1087,
+          4666
         ],
         "filename": "User.js",
-        "lineno": 24,
-        "columnno": 4,
+        "lineno": 23,
+        "columnno": 0,
         "path": "/home/runner/work/eris-docs/eris-docs/eris/lib/structures",
         "code": {
-          "id": "astnode100035516",
+          "id": "astnode100035512",
           "name": "User",
-          "type": "MethodDefinition",
+          "type": "ClassDeclaration",
           "paramnames": [
             "data",
             "client"
@@ -26657,8 +26657,8 @@
       "name": "User",
       "longname": "User",
       "kind": "class",
-      "scope": "global",
       "classdesc": "Represents a user",
+      "scope": "global",
       "properties": [
         {
           "type": {
@@ -27106,20 +27106,20 @@
       "___s": true
     },
     {
-      "comment": "",
+      "comment": "/**\n* Represents a guild voice channel\n* @extends GuildChannel\n* @prop {String} id The ID of the channel\n* @prop {String} mention A string that mentions the channel\n* @prop {Number} type The type of the channel\n* @prop {Guild} guild The guild that owns the channel\n* @prop {String?} parentID The ID of the category this channel belongs to\n* @prop {String} name The name of the channel\n* @prop {Number} position The position of the channel\n* @prop {Boolean} nsfw Whether the channel is an NSFW channel or not\n* @prop {Collection<PermissionOverwrite>} permissionOverwrites Collection of PermissionOverwrites in this channel\n* @prop {Number?} bitrate The bitrate of the channel\n* @prop {Number?} userLimit The max number of users that can join the channel\n* @prop {Collection<Member>} voiceMembers Collection of Members in this channel\n*/",
       "meta": {
         "range": [
-          1032,
-          1173
+          986,
+          3116
         ],
         "filename": "VoiceChannel.js",
-        "lineno": 24,
-        "columnno": 4,
+        "lineno": 23,
+        "columnno": 0,
         "path": "/home/runner/work/eris-docs/eris-docs/eris/lib/structures",
         "code": {
-          "id": "astnode100035953",
+          "id": "astnode100035949",
           "name": "VoiceChannel",
-          "type": "MethodDefinition",
+          "type": "ClassDeclaration",
           "paramnames": [
             "data",
             "client"
@@ -27129,11 +27129,11 @@
       "name": "VoiceChannel",
       "longname": "VoiceChannel",
       "kind": "class",
-      "scope": "global",
       "classdesc": "Represents a guild voice channel",
       "augments": [
         "GuildChannel"
       ],
+      "scope": "global",
       "properties": [
         {
           "type": {
@@ -27500,20 +27500,20 @@
       "___s": true
     },
     {
-      "comment": "",
+      "comment": "/**\n* Represents a member's voice state in a call/guild\n* @prop {String} id The ID of the member\n* @prop {String?} sessionID The ID of the member's current voice session\n* @prop {String?} channelID The ID of the member's current voice channel\n* @prop {Boolean} mute Whether the member is server muted or not\n* @prop {Boolean} deaf Whether the member is server deafened or not\n* @prop {Boolean} suppress Whether the member is suppressed or not\n* @prop {Boolean} selfMute Whether the member is self muted or not\n* @prop {Boolean} selfDeaf Whether the member is self deafened or not\n* @prop {Boolean} selfStream Whether the member is streaming using \"Go Live\"\n*/",
       "meta": {
         "range": [
-          744,
-          967
+          708,
+          2088
         ],
         "filename": "VoiceState.js",
-        "lineno": 18,
-        "columnno": 4,
+        "lineno": 17,
+        "columnno": 0,
         "path": "/home/runner/work/eris-docs/eris-docs/eris/lib/structures",
         "code": {
-          "id": "astnode100036139",
+          "id": "astnode100036135",
           "name": "VoiceState",
-          "type": "MethodDefinition",
+          "type": "ClassDeclaration",
           "paramnames": [
             "data"
           ]
@@ -27522,8 +27522,8 @@
       "name": "VoiceState",
       "longname": "VoiceState",
       "kind": "class",
-      "scope": "global",
       "classdesc": "Represents a member's voice state in a call/guild",
+      "scope": "global",
       "properties": [
         {
           "type": {
@@ -27613,20 +27613,20 @@
       "___s": true
     },
     {
-      "comment": "/**\n    * Construct a Bucket\n    * @arg {Number} tokenLimit The max number of tokens the bucket can consume per interval\n    * @arg {Number} interval How long (in ms) to wait between clearing used tokens\n    * @arg {Object} [options] Optional parameters\n    * @arg {Number} options.reservedTokens How many tokens to reserve for priority operations\n    * @arg {Object} options.latencyRef A latency reference object\n    * @arg {Number} options.latencyRef.latency Interval between consuming tokens\n    */",
+      "comment": "/**\n* Handle ratelimiting something\n* @prop {Number} tokens How many tokens the bucket has consumed in this interval\n* @prop {Number} lastReset Timestamp of last token clearing\n* @prop {Number} lastSend Timestamp of last token consumption\n* @prop {Number} tokenLimit The max number tokens the bucket can consume per interval\n* @prop {Number} interval How long (in ms) to wait between clearing used tokens\n*/",
       "meta": {
         "range": [
-          948,
-          1280
+          423,
+          3303
         ],
         "filename": "Bucket.js",
-        "lineno": 21,
-        "columnno": 4,
+        "lineno": 11,
+        "columnno": 0,
         "path": "/home/runner/work/eris-docs/eris-docs/eris/lib/util",
         "code": {
-          "id": "astnode100036359",
+          "id": "astnode100036356",
           "name": "Bucket",
-          "type": "MethodDefinition",
+          "type": "ClassDeclaration",
           "paramnames": [
             "tokenLimit",
             "interval",
@@ -27637,9 +27637,9 @@
       "name": "Bucket",
       "longname": "Bucket",
       "kind": "class",
-      "description": "Construct a Bucket",
-      "scope": "global",
       "classdesc": "Handle ratelimiting something",
+      "scope": "global",
+      "description": "Construct a Bucket",
       "params": [
         {
           "type": {
@@ -27802,20 +27802,20 @@
       "___s": true
     },
     {
-      "comment": "/**\n    * Construct a Collection\n    * @arg {Class} baseObject The base class for all items\n    * @arg {Number} [limit] Max number of items to hold\n    */",
+      "comment": "/**\n* Hold a bunch of something\n* @extends Map\n* @prop {Class} baseObject The base class for all items\n* @prop {Number?} limit Max number of items to hold\n*/",
       "meta": {
         "range": [
-          367,
-          488
+          173,
+          6017
         ],
         "filename": "Collection.js",
-        "lineno": 15,
-        "columnno": 4,
+        "lineno": 9,
+        "columnno": 0,
         "path": "/home/runner/work/eris-docs/eris-docs/eris/lib/util",
         "code": {
-          "id": "astnode100036772",
+          "id": "astnode100036768",
           "name": "Collection",
-          "type": "MethodDefinition",
+          "type": "ClassDeclaration",
           "paramnames": [
             "baseObject",
             "limit"
@@ -27825,12 +27825,12 @@
       "name": "Collection",
       "longname": "Collection",
       "kind": "class",
-      "description": "Construct a Collection",
-      "scope": "global",
       "classdesc": "Hold a bunch of something",
       "augments": [
         "Map"
       ],
+      "scope": "global",
+      "description": "Construct a Collection",
       "params": [
         {
           "type": {
@@ -28478,20 +28478,20 @@
       "___s": true
     },
     {
-      "comment": "/**\n    * Construct a SequentialBucket\n    * @arg {Number} tokenLimit The max number of tokens the bucket can consume per interval\n    * @arg {Object} [latencyRef] An object\n    * @arg {Number} latencyRef.latency Interval between consuming tokens\n    */",
+      "comment": "/**\n* Ratelimit requests and release in sequence\n* @prop {Number} limit How many tokens the bucket can consume in the current interval\n* @prop {Number} remaining How many tokens the bucket has left in the current interval\n* @prop {Number} reset Timestamp of next reset\n* @prop {Boolean} processing Whether the queue is being processed\n*/",
       "meta": {
         "range": [
-          640,
-          859
+          353,
+          2385
         ],
         "filename": "SequentialBucket.js",
-        "lineno": 17,
-        "columnno": 4,
+        "lineno": 10,
+        "columnno": 0,
         "path": "/home/runner/work/eris-docs/eris-docs/eris/lib/util",
         "code": {
-          "id": "astnode100037559",
+          "id": "astnode100037556",
           "name": "SequentialBucket",
-          "type": "MethodDefinition",
+          "type": "ClassDeclaration",
           "paramnames": [
             "limit",
             "latencyRef"
@@ -28501,9 +28501,9 @@
       "name": "SequentialBucket",
       "longname": "SequentialBucket",
       "kind": "class",
-      "description": "Construct a SequentialBucket",
-      "scope": "global",
       "classdesc": "Ratelimit requests and release in sequence",
+      "scope": "global",
+      "description": "Construct a SequentialBucket",
       "params": [
         {
           "type": {
@@ -28620,31 +28620,31 @@
       "___s": true
     },
     {
-      "comment": "",
+      "comment": "/**\n* Represents a collection of VoiceConnections sharing an input stream\n* @extends EventEmitter\n*/",
       "meta": {
         "range": [
-          485,
-          1282
+          439,
+          7937
         ],
         "filename": "SharedStream.js",
-        "lineno": 20,
-        "columnno": 4,
+        "lineno": 19,
+        "columnno": 0,
         "path": "/home/runner/work/eris-docs/eris-docs/eris/lib/voice",
         "code": {
-          "id": "astnode100039403",
+          "id": "astnode100039399",
           "name": "SharedStream",
-          "type": "MethodDefinition",
+          "type": "ClassDeclaration",
           "paramnames": []
         }
       },
       "name": "SharedStream",
       "longname": "SharedStream",
       "kind": "class",
-      "scope": "global",
       "classdesc": "Represents a collection of VoiceConnections sharing an input stream",
       "augments": [
         "EventEmitter"
       ],
+      "scope": "global",
       "___id": "T000002R002741",
       "___s": true
     },
@@ -28985,20 +28985,20 @@
       "___s": true
     },
     {
-      "comment": "",
+      "comment": "/**\n* Represents a voice connection\n* @extends EventEmitter\n* @prop {String} id The ID of the voice connection (guild ID)\n* @prop {String} channelID The ID of the voice connection's current channel\n* @prop {Boolean} connecting Whether the voice connection is connecting\n* @prop {Boolean} ready Whether the voice connection is ready\n* @prop {Boolean} playing Whether the voice connection is playing something\n* @prop {Boolean} paused Whether the voice connection is paused\n* @prop {Number} volume The current volume level of the connection\n* @prop {Object?} current The state of the currently playing stream\n* @prop {Number} current.startTime The timestamp of the start of the current stream\n* @prop {Number} current.playTime How long the current stream has been playing for, in milliseconds\n* @prop {Number} current.pausedTimestamp The timestamp of the most recent pause\n* @prop {Number} current.pausedTime How long the current stream has been paused for, in milliseconds\n* @prop {Options} current.options The custom options for the current stream\n*/",
       "meta": {
         "range": [
-          2672,
-          4548
+          2623,
+          28679
         ],
         "filename": "VoiceConnection.js",
-        "lineno": 81,
-        "columnno": 4,
+        "lineno": 80,
+        "columnno": 0,
         "path": "/home/runner/work/eris-docs/eris-docs/eris/lib/voice",
         "code": {
-          "id": "astnode100040516",
+          "id": "astnode100040512",
           "name": "VoiceConnection",
-          "type": "MethodDefinition",
+          "type": "ClassDeclaration",
           "paramnames": [
             "id",
             "options"
@@ -29008,11 +29008,11 @@
       "name": "VoiceConnection",
       "longname": "VoiceConnection",
       "kind": "class",
-      "scope": "global",
       "classdesc": "Represents a voice connection",
       "augments": [
         "EventEmitter"
       ],
+      "scope": "global",
       "properties": [
         {
           "type": {
@@ -29927,20 +29927,20 @@
       "___s": true
     },
     {
-      "comment": "",
+      "comment": "/**\n* Represents a voice data stream\n* @extends EventEmitter\n* @prop {String} type The targeted voice data type for the stream, either \"opus\" or \"pcm\"\n*/",
       "meta": {
         "range": [
-          356,
-          424
+          307,
+          426
         ],
         "filename": "VoiceDataStream.js",
-        "lineno": 16,
-        "columnno": 4,
+        "lineno": 15,
+        "columnno": 0,
         "path": "/home/runner/work/eris-docs/eris-docs/eris/lib/voice",
         "code": {
-          "id": "astnode100044368",
+          "id": "astnode100044364",
           "name": "VoiceDataStream",
-          "type": "MethodDefinition",
+          "type": "ClassDeclaration",
           "paramnames": [
             "type"
           ]
@@ -29949,11 +29949,11 @@
       "name": "VoiceDataStream",
       "longname": "VoiceDataStream",
       "kind": "class",
-      "scope": "global",
       "classdesc": "Represents a voice data stream",
       "augments": [
         "EventEmitter"
       ],
+      "scope": "global",
       "properties": [
         {
           "type": {
